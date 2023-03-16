@@ -1,0 +1,54 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SimpleTransformWithTransitionFunctionsExample.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="SimpleTransformWithTransitionFunctionsExample.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="SimpleTransformWithTransitionFunctionsExample">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+	<Canvas>
+		<!--translte = px-->
+		<Rectangle Height="50" Width="50" Fill="Black" RenderTransform="translate(10px)"/>
+		<Rectangle Height="50" Width="50" Fill="Beige" RenderTransform="translate(0, 70px)"/>
+		<Rectangle Height="50" Width="50" Fill="BlanchedAlmond" RenderTransform="translateX(70px)"/>
+		<Rectangle Height="50" Width="50" Fill="Chocolate" RenderTransform="translateY(140px)"/>
+		
+		<Ellipse Height="70" Width="40" Fill="Blue" Canvas.Left="150" RenderTransform="scale(1.5)"/>
+		<Ellipse Height="70" Width="40" Fill="DarkKhaki" Canvas.Left="250" RenderTransform="scaleX(2)"/>
+		<Ellipse Height="70" Width="40" Fill="DarkSlateGray" Canvas.Left="350" RenderTransform="scaleY(2)"/>
+		<!--skew = deg, grad, rad, turn-->
+		<Polygon Points="0,0 0,100 50,150 100,100 100,0" Fill="DarkRed"
+				 Canvas.Top="200" Canvas.Left="100"
+				 RenderTransform="skew(170deg)"/>
+		<Polygon Points="0,0 0,100 50,150 100,100 100,0" Fill="DarkTurquoise"
+				 Canvas.Top="200" Canvas.Left="250"
+				 RenderTransform="skew(0, 170deg)"/>
+		<Polygon Points="0,0 0,100 50,150 100,100 100,0" Fill="ForestGreen"
+				 Canvas.Top="200" Canvas.Left="400"
+				 RenderTransform="skewX(20deg)"/>
+		<Polygon Points="0,0 0,100 50,150 100,100 100,0" Fill="DimGray"
+				 Canvas.Top="200" Canvas.Left="550"
+				 RenderTransform="skewY(20deg)"/>
+		<!--rotate = deg, grad, rad, turn-->
+		<Line StartPoint="0,0" EndPoint="100, 100"
+			  Stroke="DarkOrchid"
+			  StrokeThickness="3"
+			  Canvas.Left="500"
+			  Canvas.Top="50"/>
+		<Line StartPoint="0,0" EndPoint="100, 100"
+			  Stroke="DarkOrchid"
+			  StrokeThickness="3"
+			  Canvas.Left="650"
+			  Canvas.Top="50" RenderTransform="rotate(90deg)">
+		</Line>
+	</Canvas>
+
+</Window>

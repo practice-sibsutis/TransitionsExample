@@ -1,0 +1,53 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SimpleTransformExample.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:models="clr-namespace:SimpleTransformExample.Models;assembly=SimpleTransformExample"
+		xmlns:conv="clr-namespace:SimpleTransformExample.Converters;assembly=SimpleTransformExample"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="SimpleTransformExample.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="SimpleTransformExample">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+	<Window.Resources>
+		<conv:ColorToBrushConverter x:Key="colorToBrushConverter"/>
+	</Window.Resources>
+
+	<Window.DataTemplates>
+		<DataTemplate DataType="{x:Type models:TransformRectangle}">
+			<Rectangle Height="{Binding Height}"
+					   Width="{Binding Width}"
+					   Fill="{Binding Color, Converter={StaticResource colorToBrushConverter}}">
+				<Rectangle.RenderTransform>
+					<TransformGroup>
+						<RotateTransform Angle="{Binding AngleTransformDeg}"
+										 CenterX="{Binding AngleTransformCenterX}"
+										 CenterY="{Binding AngleTransformCenterY}"/>
+						<TranslateTransform X="{Binding TranslateTransformX}"
+											Y="{Binding TranslateTransformY}"/>
+						<ScaleTransform ScaleX="{Binding ScaleTransformX}"
+										ScaleY="{Binding ScaleTransformY}"/>
+						<SkewTransform AngleX="{Binding AngleSkewTransformX}"
+									   AngleY="{Binding AngleSkewTransformY}"/>
+					</TransformGroup>
+				</Rectangle.RenderTransform>
+			</Rectangle>
+		</DataTemplate>
+	</Window.DataTemplates>
+
+	<ItemsControl Items="{Binding TransformRectangles}">
+		<ItemsControl.ItemsPanel>
+			<ItemsPanelTemplate>
+				<Canvas/>
+			</ItemsPanelTemplate>
+		</ItemsControl.ItemsPanel>
+	</ItemsControl>
+
+</Window>

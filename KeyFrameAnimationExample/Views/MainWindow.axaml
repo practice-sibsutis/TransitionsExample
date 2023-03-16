@@ -1,0 +1,42 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:KeyFrameAnimationExample.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="KeyFrameAnimationExample.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="KeyFrameAnimationExample">
+
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
+
+	<Window.Styles>
+		<Style Selector="Rectangle.red">
+			<Setter Property="Height" Value="100"/>
+			<Setter Property="Width" Value="100"/>
+			<Setter Property="Fill" Value="Red"/>
+			<Style.Animations>
+				<Animation Duration="0:0:1"
+						   RepeatCount="INFINITE"
+						   PlaybackDirection="Alternate"
+						   Easing="SineEaseInOut">
+					<KeyFrame Cue="0%">
+						<Setter Property="Opacity" Value="0.0"/>
+					</KeyFrame>
+					<KeyFrame Cue="100%">
+						<Setter Property="Opacity" Value="1.0"/>
+						<Setter Property="Width" Value="50"/>
+						<Setter Property="Height" Value="50"/>
+					</KeyFrame>
+				</Animation>
+			</Style.Animations>
+		</Style>
+	</Window.Styles>
+
+	<Rectangle Classes="red"/>
+
+</Window>
